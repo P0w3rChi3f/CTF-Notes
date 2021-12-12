@@ -8,5 +8,5 @@ data = lever.data()
 data.insert(0, "munchkins rule")
 lever.pull(data)
 elf.moveDown(3)
-elf.moveTo({"x":2, "y":3})
+elf.moveTo({"x":2, "y":2})
 
