@@ -1,6 +1,6 @@
 # SEC530-Day06  
 
-## Level 1
+## SEC530
 
 1. NTP DoS - Monlist
 2. 9 $9$7HMiVNcHwGuyyI$qe5Geds4Vvcij5fl6asR3wAvO7pDFt/iJddDM6gKaF2 - ***Cicos type 9 / SCRYPT***
@@ -46,7 +46,7 @@
 
 10. DHCP Discover option for DHCP Fingerprinting ***55***  
 
-## SEC530 - IPv6  
+## Sec530 IPv6 Part 1  
 
 1. fe80:: is a ***Link-Local Address***  
 
@@ -130,4 +130,90 @@
     ./john /home/student/Desktop/RouterCFG.txt
     ```  
 
-4. Tyrell's password on 10.5.30.100 is ***MoreHumanThanHuman*** by using an online Cisco password 7 cracker.
+4. Tyrell's password on 10.5.30.100 is ***MoreHumanThanHuman*** by using an online Cisco password 7 cracker.  
+
+5. Audit the saved IOS configuration on 10.5.30.100 with Nipper-ng. ***16***
+
+    ```nipper-ng
+    ssh sebastion@10.5.30.100
+    show config
+
+    Copied the config from the headder:
+    !
+    Last config change
+    !
+    ...to... 
+    end
+
+    nipper --input=/tmp/router.cfg > /tmp/routerAudit.html
+    firefox /tmp/routherAudit.html &
+    ```
+
+6. What Cisco IOS command will disable CDP on the entire router? ***no cdp run***  
+7. What Cisco IOS command will disable telnet on the router and only allow SSH? ***transport input ssh***  
+
+## Sec530 Voight-Kampff  
+
+1. The binary used to create a basic authentication file? This utility allows you to create password files for use with Squid ***htpasswd***  
+2. configuring a Squid proxy server to run on port 3128 and to require the user student with a password of Security530.  I had to start the squid docker `sudo pwsh /labs/check.ps1 -check precheck -lab 2.4`
+
+    ```squid
+    Created password file:
+    sudo htpasswd -c /etc/squid/passwords username_you_like
+
+    Other code from the hint:
+
+    auth_param basic program /usr/lib/squid3/basic_ncsa_auth /etc/squid3/basicauth
+    acl lan proxy_auth required
+    http_access allow lan
+    ```  
+
+3. which certificate do you need to present to prove you are who you say you are.  ***Client Public Certificate***  
+4. Prove who you are by submitting your blade runner identification to [this site](https://auth.tyrellcorp.us:8443).  
+
+    ```openssl
+    Imported the .pfx file and browsed to https://auth.tyrellcorp.us:8443 and found "And Zhora is no more" on the site.
+    ```  
+
+5. One more question to prove whether you are a replicant or a blade runner. Answer in a single word (phrase with no spaces). In your mind you have a dark secret. It is ***CongratulationsYouAreHuman***
+
+    ```docker
+    Started the container:
+    docker start bladerunner
+
+    Got an interactive shell:
+    docker run -it hasecuritysolutions/voight-kampff /bin/bash
+
+    Listed contents:
+    ls
+
+    Instpected the container and recieved PID of 6558:
+    docker inspect bladerunner | grep Pid
+
+    Dumped the proc:
+    sudo procdump -p 6558
+    strings bash_time_2021-12-26_12\:34\:51.6558 | grep SECRET
+    SECRET=CongratulationsYouAreHuman
+    ```
+
+## Sec530 Secure Services
+
+1. Configuration option forces strong algorithms to be loaded according to the server's preference is ***SSLHonorCipherOrder***  
+2. The configuration option that minimalizes the Apache Server header is ***ServerTokens ProductOnly***  
+3. Configuring Apache on your Linux VM to produce the most limited Server header that still identifies Apache as a Apache server.  Answer is ***My friends are toys. I make them.***
+
+    ```apache
+    Configured the "sudo vi /etc/apache2/conf-enabled/security.conf" and uncommented ServerTokens ProductOnly and commnented everything else
+    ```  
+
+4. Configure Apache so that it presents itself as ElectricFence.  Answer is ***Front door closed. Only way to Tyrell is social engineering Sebastian.***  
+
+    ```apache
+    I uncommented out "ServerTokens Full" and commented out "ServerTokens ProductOnly" and added "SecServerSignature "ElectricFence"
+
+    Hint says I needed to use ModSecurity.
+
+    Check the config by 'sudo pwsh /labs/dtf/dtf_check.ps1 -check "banner_change"'
+    ```  
+
+5. 
