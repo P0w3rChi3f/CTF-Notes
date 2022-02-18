@@ -16,3 +16,4 @@
   * Zone Signing Key (ZSK): It is used to sign records in a DNS Zone
   * Key Signing Key (KSK): It is used to sign the Zone Signing Key (ZSK) and create a chain of trust with its upper level.  
   
+## Training 17 Feb 2022
