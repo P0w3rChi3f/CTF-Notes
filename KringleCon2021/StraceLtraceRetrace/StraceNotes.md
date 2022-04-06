@@ -6,7 +6,7 @@
 4. This time it had a `Unregistered - Exiting.` message.
 5. I tried to add some text to the json file and it didn't work.  It did produce a new library call `strstr` and showed my input.  I didn't think of anything then, but it helped out later.
 6. After a couple days of reading about [ltrace](https://man7.org/linux/man-pages/man1/ltrace.1.html) and [strace](https://man7.org/linux/man-pages/man1/strace.1.html) and all the various system and library calls.
-7. I finally read some of the chats and took the hit of looking for `strstr`.  Here is where I started having fun.
+7. I finally read some of the chats and took the hint of looking for `strstr`.  Here is where I started having fun.
 8. I added `1234567890` to the file; then ran `ltrace ./make_the_candy`; I found this line to be interesting `strstr("123456789\n", "Registration")`
 9. Next thought was to add json formating; so I added the `{}` so now my json looks like:
 

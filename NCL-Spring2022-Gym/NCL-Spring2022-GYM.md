@@ -45,7 +45,7 @@ Used http://rumkin.com/tools/cipher/atbash.php and the ***morse*** decoder
 
 Used https://planetcalc.com/6947/ and decoded the ***Rail fence cipher***
 
-* Example Encoded message: 	
+* Example Encoded message:  
 Cair eruSA-0org sgaeudrpesr K-II98.ue cn seYQ3  
 * Decoded message: Courage is grace under pressure SKY-AIQI-9380.  
 
